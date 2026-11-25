@@ -1,0 +1,31 @@
+import os
+import math
+import json
+
+n=5
+
+for filename in os.listdir("jsons"):
+    if filename.endswith(".json"):
+        file_path = os.path.join("jsons", filename)
+        with open(file_path, "r" , encoding="utf-8") as f:
+            data = json.load(f)
+            new_chunks = []
+            num_chunks = len(data["chunks"])
+            num_groups = math.ceil(num_chunks / n)
+
+            for i in range(num_groups):
+                start_index = i * n
+                end_index = min((i + 1) * n, num_chunks)
+                group_chunks = data["chunks"][start_index:end_index]
+                new_chunks.append({
+                    "numbers": group_chunks[0]["numbers"],
+                    "title": group_chunks[0]["title"],
+                    "start": group_chunks[0]["start"],
+                    "end": group_chunks[-1]["end"],
+                    "text": " ".join(chunk["text"] for chunk in group_chunks)
+                })
+
+                # Save the new chunks to a new JSON file
+                os.makedirs("new_jsons", exist_ok=True)
+                with open(os.path.join("new_jsons", filename), "w", encoding="utf-8") as json_file:
+                    json.dump({"chunks": new_chunks, "text": data["text"]}, json_file, indent=4)

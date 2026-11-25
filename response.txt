@@ -1,0 +1,7 @@
+Hello! How can I help you with CSS? 🎯
+
+From what we've learned so far, CSS stands for Cascading Style Sheets, and we use it to style the HTML web page. Styling means changing the visual modifications in the web page so that it looks more readable and beautiful. 
+
+There are three ways to style the HTML document. 
+
+To learn more about styling with CSS, check out video 1 from 272.3 to 294.3 seconds.
